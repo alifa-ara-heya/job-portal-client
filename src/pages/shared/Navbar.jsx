@@ -1,16 +1,26 @@
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Link, NavLink } from "react-router-dom";
+import AuthContext from "../../context/AuthContext/AuthContext";
+import logo from '../../assets/jobs-logo.png'
 
 const Navbar = () => {
+    const { user, signOutUser } = useContext(AuthContext);
+
+    const handleSignOut = () => {
+        signOutUser()
+            .then(() => {
+                console.log('successfully signed out');
+            })
+            .catch(error => {
+                console.log('failed to sign out.', error.message);
+            })
+    }
+
     const links = <>
-        <li><a>Item 1</a></li>
-        <li>
-            <a>Parent</a>
-            <ul className="p-2">
-                <li><a>Submenu 1</a></li>
-                <li><a>Submenu 2</a></li>
-            </ul>
-        </li>
-        <li><a>Item 3</a></li></>
+        <li><NavLink to='/'>Home</NavLink></li>
+        <li><NavLink to='/'>Home</NavLink></li>
+        <li><NavLink to='/'>Home</NavLink></li>
+    </>
     return (
         <div className="navbar bg-base-100">
             <div className="navbar-start">
@@ -35,7 +45,11 @@ const Navbar = () => {
                         {links}
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl">daisyUI</a>
+                <a className="btn btn-ghost text-xl">
+                    <img src={logo} className="w-14" alt="" />
+                    <h3 className="text-3xl">Job Portal</h3>
+                </a>
+
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
@@ -43,8 +57,19 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <Link to='/register' className="btn">Register</Link>
-                <Link className="btn">SIgn In</Link>
+                {
+                    user ?
+                        <>
+                            <button onClick={handleSignOut} className="btn">Sign Out</button>
+                            <p>{user.displayName}</p>
+                            {/* dekhabena */}
+                        </>
+                        :
+                        <>
+                            <Link to='/register' className="btn">Register</Link>
+                            <Link to='/sign-in' className="btn">SIgn In</Link></>
+                }
+
             </div>
         </div>
     );
