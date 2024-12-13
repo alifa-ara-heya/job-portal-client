@@ -1,5 +1,6 @@
 import { MdLocationPin } from "react-icons/md";
 import { TbCoinTakaFilled } from "react-icons/tb";
+import { Link } from "react-router-dom";
 
 const HotJobCard = ({ job }) => {
     const { title, company, company_logo, requirements, description, location, salaryRange } = job;
@@ -30,7 +31,7 @@ const HotJobCard = ({ job }) => {
                 </div>
                 <div className="card-actions justify-end items-center mt-4">
                     <p className="flex items-center gap-2"><TbCoinTakaFilled />Salary: {salaryRange.min}-{salaryRange.max}{salaryRange.currency}</p>
-                    <button className="btn btn-primary">Apply</button>
+                    <Link to={`/jobs/${job._id}`}><button className="btn btn-primary">Apply</button></Link>
                 </div>
             </div>
         </div>
