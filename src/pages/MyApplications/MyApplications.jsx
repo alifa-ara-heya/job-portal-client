@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 const MyApplications = () => {
     const { user } = useAuth();
     const [jobs, setJobs] = useState([]);
+    // console.log(jobs);
 
     useEffect(() => {
         fetch(`http://localhost:5000/job-applications?email=${user.email}`)
@@ -70,7 +71,7 @@ const MyApplications = () => {
                             </th>
                             <th>Name</th>
                             <th>Job</th>
-                            <th>Favorite Color</th>
+                            <th>Deadline</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -103,7 +104,8 @@ const MyApplications = () => {
                                     <br />
                                     <span className="badge badge-ghost badge-sm">Desktop Support Technician</span>
                                 </td>
-                                <td>Purple</td>
+                                {/* <td>{job.applicationDeadline}</td> */}
+                                <td>something happened</td>
                                 <th>
                                     <button
                                         onClick={() => handleDelete(job._id)}

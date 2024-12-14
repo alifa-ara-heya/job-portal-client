@@ -34,7 +34,7 @@ const AddJob = () => {
                         text: "Job has been added",
                         icon: "success"
                     });
-                    navigate('/myApplications')
+                    navigate('/myPostedJobs')
                 }
             })
     }
@@ -122,6 +122,15 @@ const AddJob = () => {
                     </label>
                     <input type="text"
                         name="hr_name" placeholder="HR Name" className="input input-bordered" required />
+                </div>
+
+                {/* application deadline */}
+                <div className="form-control">
+                    <label className="label">
+                        <span className="label-text">Deadline</span>
+                    </label>
+                    <input type="date"
+                        name="deadline" placeholder="Deadline" className="input input-bordered" required />
                 </div>
 
                 {/* hr email */}
