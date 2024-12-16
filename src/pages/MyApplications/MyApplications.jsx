@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import useAuth from "../../Hooks/useAuth";
 import { FaTrashCan } from "react-icons/fa6";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 
 const MyApplications = () => {
@@ -10,11 +11,19 @@ const MyApplications = () => {
     // console.log(jobs);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/job-applications?email=${user.email}`)
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                setJobs(data)
+        // primary way
+        // fetch(`http://localhost:5000/job-applications?email=${user.email}`)
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         console.log(data);
+        //         setJobs(data)
+        //     })
+
+        // data fetching with axios
+        axios.get(`http://localhost:5000/job-applications?email=${user.email}`, { withCredentials: true })
+            .then(res => {
+                // console.log((res.data));
+                setJobs(res.data)
             })
     }, [user.email])
 
